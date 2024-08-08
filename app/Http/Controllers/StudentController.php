@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -23,7 +24,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('students.form');
     }
 
     /**
@@ -31,7 +32,30 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $student         = new Student();
+        // $student->name   = $request->name;
+        // $student->nim    = $request->nim;
+        // $student->dob    = $request->dob;
+        // $student->gender = $request->gender;
+        // $student->save();
+
+        // cara kedua
+        Student::create([
+            'name'   => $request->name,
+            'nim'    => $request->nim,
+            'dob'    => $request->dob,
+            'gender' => $request->gender,
+        ]);
+
+        // cara ketiga
+        // DB::table('students')->insert([
+        //     'name'   => $request->name,
+        //     'nim'    => $request->nim,
+        //     'dob'    => $request->dob,
+        //     'gender' => $request->gender,
+        // ]);
+
+        return redirect()->back()->with('successMessage', 'Mahasiswa berhasil ditambahkan');
     }
 
     /**

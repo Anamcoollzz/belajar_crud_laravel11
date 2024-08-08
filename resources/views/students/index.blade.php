@@ -15,6 +15,9 @@
   </center>
 
   <div class="container">
+
+    <a href="{{ route('students.create') }}" class="btn btn-primary mb-2">Tambah</a>
+
     <table class="table table-bordered table-striped ">
       <thead>
         <tr>
