@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nim')->unique();
             $table->date('dob');
             $table->enum('gender', ['Laki-laki', 'Perempuan']);
+            $table->string('avatar');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -39,12 +40,16 @@ class StudentController extends Controller
         // $student->gender = $request->gender;
         // $student->save();
 
+        $path = $request->file('avatar')->store('public/avatars');
+        $url  = asset(Storage::url($path));
+
         // cara kedua
         Student::create([
             'name'   => $request->name,
             'nim'    => $request->nim,
             'dob'    => $request->dob,
             'gender' => $request->gender,
+            'avatar' => $url,
         ]);
 
         // cara ketiga
@@ -90,11 +95,19 @@ class StudentController extends Controller
         // $student->gender = $request->gender;
         // $student->save();
 
+        $url = $student->avatar;
+
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public/avatars');
+            $url  = asset(Storage::url($path));
+        }
+
         $student->update([
             'name'   => $request->name,
             'nim'    => $request->nim,
             'dob'    => $request->dob,
             'gender' => $request->gender,
+            'avatar' => $url,
         ]);
 
         return redirect()->back()->with('successMessage', 'Mahasiswa berhasil diperbarui');

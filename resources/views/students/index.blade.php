@@ -32,6 +32,7 @@
           <th scope="col">NIM</th>
           <th scope="col">Tanggal Lahir</th>
           <th scope="col">Jenis Kelamin</th>
+          <th scope="col">Avatar</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
@@ -43,6 +44,11 @@
             <td>{{ $item->nim }}</td>
             <td>{{ $item->dob }}</td>
             <td>{{ $item->gender }}</td>
+            <td>
+              <a href="{{ $item->avatar }}" target="_blank">
+                <img style="max-width: 100px;" class="img-thumbnail" src="{{ $item->avatar }}" />
+              </a>
+            </td>
             <td>
               <a href="{{ route('students.edit', [$item->id]) }}" class="btn btn-primary">Edit</a>
               <a href="#" onclick="hapus(event, '{{ route('students.destroy', [$item->id]) }}')" class="btn btn-danger">Hapus</a>

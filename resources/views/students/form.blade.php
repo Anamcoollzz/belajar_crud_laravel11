@@ -26,7 +26,7 @@
 
     <form @isset($d) action="{{ route('students.update', [$d->id]) }}" @else
         action="{{ route('students.store') }}"
-    @endisset method="POST">
+    @endisset method="POST" enctype="multipart/form-data">
       @csrf
       @isset($d)
         @method('PUT')
@@ -54,6 +54,10 @@
             <option value="Perempuan">Perempuan</option>
           @endisset
         </select>
+      </div>
+      <div class="mb-3">
+        <label for="avatar" class="form-label">Avatar</label>
+        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

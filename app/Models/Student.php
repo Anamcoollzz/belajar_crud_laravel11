@@ -19,5 +19,6 @@ class Student extends Model
         'nim',
         'dob',
         'gender',
+        'avatar',
     ];
 }
