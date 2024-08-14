@@ -38,7 +38,7 @@
             <td>{{ $item->dob }}</td>
             <td>{{ $item->gender }}</td>
             <td>
-              <a href="" class="btn btn-primary">Edit</a>
+              <a href="{{ route('students.edit', [$item->id]) }}" class="btn btn-primary">Edit</a>
               <a href="" class="btn btn-danger">Hapus</a>
             </td>
           </tr>

@@ -24,25 +24,35 @@
 
     <a href="{{ route('students.index') }}" class="btn btn-primary">Lihat Data</a>
 
-    <form action="{{ route('students.store') }}" method="POST">
+    <form @isset($d) action="{{ route('students.update', [$d->id]) }}" @else
+        action="{{ route('students.store') }}"
+    @endisset method="POST">
       @csrf
+      @isset($d)
+        @method('PUT')
+      @endisset
       <div class="mb-3">
         <label for="name" class="form-label">Nama</label>
-        <input type="text" class="form-control" id="name" name="name">
+        <input type="text" class="form-control" id="name" name="name" value="{{ $d->name ?? '' }}">
       </div>
       <div class="mb-3">
         <label for="nim" class="form-label">NIM</label>
-        <input type="text" class="form-control" id="nim" name="nim">
+        <input type="text" class="form-control" id="nim" name="nim" value="{{ $d->nim ?? '' }}">
       </div>
       <div class="mb-3">
         <label for="dob" class="form-label">Tanggal Lahir</label>
-        <input type="date" class="form-control" id="dob" name="dob">
+        <input type="date" class="form-control" id="dob" name="dob" value="{{ $d->dob ?? '' }}">
       </div>
       <div class="mb-3">
         <label for="gender" class="form-label">Jenis Kelamin</label>
         <select class="form-select" name="gender" id="gender">
-          <option value="Laki-laki">Laki-laki</option>
-          <option value="Perempuan">Perempuan</option>
+          @isset($d)
+            <option value="Laki-laki" @if ($d->gender === 'Laki-laki') selected @endif>Laki-laki</option>
+            <option value="Perempuan" @if ($d->gender === 'Perempuan') selected @endif>Perempuan</option>
+          @else
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          @endisset
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>

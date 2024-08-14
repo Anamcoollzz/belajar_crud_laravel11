@@ -71,7 +71,10 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        return view('students.form', [
+            'd' => $student
+        ]);
     }
 
     /**
@@ -79,7 +82,15 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $student->update([
+            'name'   => $request->name,
+            'nim'    => $request->nim,
+            'dob'    => $request->dob,
+            'gender' => $request->gender,
+        ]);
+
+        return redirect()->back()->with('successMessage', 'Mahasiswa berhasil diperbarui');
     }
 
     /**
