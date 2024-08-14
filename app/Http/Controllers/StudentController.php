@@ -105,6 +105,15 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // $student = Student::findOrFail($id);
+        // $student->delete();
+
+        // cara kedua
+        // DB::table('students')->where('id', $id)->delete();
+
+        // cara ketiga
+        Student::where('id', $id)->delete();
+
+        return redirect()->back()->with('successMessage', 'Mahasiswa berhasil dihapus');
     }
 }

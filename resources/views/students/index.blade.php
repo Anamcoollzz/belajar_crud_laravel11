@@ -16,6 +16,12 @@
 
   <div class="container">
 
+    @if (session('successMessage'))
+      <div class="alert alert-info">
+        {{ session('successMessage') }}
+      </div>
+    @endif
+
     <a href="{{ route('students.create') }}" class="btn btn-primary mb-2">Tambah</a>
 
     <table class="table table-bordered table-striped ">
@@ -39,7 +45,7 @@
             <td>{{ $item->gender }}</td>
             <td>
               <a href="{{ route('students.edit', [$item->id]) }}" class="btn btn-primary">Edit</a>
-              <a href="" class="btn btn-danger">Hapus</a>
+              <a href="#" onclick="hapus(event, '{{ route('students.destroy', [$item->id]) }}')" class="btn btn-danger">Hapus</a>
             </td>
           </tr>
         @endforeach
@@ -47,7 +53,23 @@
     </table>
   </div>
 
+  <form action="" method="POST" id="formHapus">
+    @csrf
+    @method('DELETE')
+  </form>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <script>
+    function hapus(e, url) {
+      if (confirm('Apakah anda akan menghapus data ini?')) {
+        document.getElementById('formHapus').action = url;
+        document.getElementById('formHapus').submit();
+      } else {
+        e.preventDefault();
+      }
+    }
+  </script>
 </body>
 
 </html>
