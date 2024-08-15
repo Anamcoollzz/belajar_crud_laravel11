@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +32,16 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
+        // $request->validate([
+        //     'name'   => 'required',
+        //     'nim'    => 'required|numeric',
+        //     'dob'    => 'required|date',
+        //     'gender' => 'required',
+        //     'avatar' => 'required|image'
+        // ]);
+
         // $student         = new Student();
         // $student->name   = $request->name;
         // $student->nim    = $request->nim;
@@ -85,8 +94,16 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StudentRequest $request, string $id)
     {
+        // $request->validate([
+        //     'name'   => 'required',
+        //     'nim'    => 'required|numeric',
+        //     'dob'    => 'required|date',
+        //     'gender' => 'required',
+        //     'avatar' => 'nullable|image'
+        // ]);
+
         $student = Student::findOrFail($id);
 
         // $student->name   = $request->name;

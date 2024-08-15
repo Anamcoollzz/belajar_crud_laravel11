@@ -33,31 +33,58 @@
       @endisset
       <div class="mb-3">
         <label for="name" class="form-label">Nama</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{ $d->name ?? '' }}">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') ?? ($d->name ?? '') }}">
+        @error('name')
+          <div id="invalidFeedbackName" class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="nim" class="form-label">NIM</label>
-        <input type="text" class="form-control" id="nim" name="nim" value="{{ $d->nim ?? '' }}">
+        <input type="number" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" value="{{ old('nim') ?? ($d->nim ?? '') }}" required>
+        @error('nim')
+          <div id="invalidFeedbackNim" class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="dob" class="form-label">Tanggal Lahir</label>
-        <input type="date" class="form-control" id="dob" name="dob" value="{{ $d->dob ?? '' }}">
+        <input type="date" class="form-control @error('dob') is-invalid @enderror" id="dob" name="dob" value="{{ old('dob') ?? ($d->dob ?? '') }}" required>
+        @error('dob')
+          <div id="invalidFeedbackDob" class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="gender" class="form-label">Jenis Kelamin</label>
-        <select class="form-select" name="gender" id="gender">
+        <select class="form-select @error('gender') is-invalid @enderror" name="gender" id="gender" required>
           @isset($d)
-            <option value="Laki-laki" @if ($d->gender === 'Laki-laki') selected @endif>Laki-laki</option>
-            <option value="Perempuan" @if ($d->gender === 'Perempuan') selected @endif>Perempuan</option>
+            <option value="">Pilih salah satu</option>
+            <option value="Laki-laki" @if ((old('gender') ?? $d->gender) === 'Laki-laki') selected @endif>Laki-laki</option>
+            <option value="Perempuan" @if ((old('gender') ?? $d->gender) === 'Perempuan') selected @endif>Perempuan</option>
           @else
-            <option value="Laki-laki">Laki-laki</option>
-            <option value="Perempuan">Perempuan</option>
+            <option value="">Pilih salah satu</option>
+            <option @if (old('gender') === 'Laki-laki') selected @endif value="Laki-laki">Laki-laki</option>
+            <option @if (old('gender') === 'Perempuan') selected @endif value="Perempuan">Perempuan</option>
           @endisset
         </select>
+        @error('gender')
+          <div id="invalidFeedbackGender" class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="avatar" class="form-label">Avatar</label>
-        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+        <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="avatar" name="avatar" accept="image/*" required>
+        @error('avatar')
+          <div id="invalidFeedbackAvatar" class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
