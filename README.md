@@ -12,6 +12,7 @@
 
 -   Github https://github.com/Anamcoollzz/belajar_crud_laravel11
 -   Laravel https://laravel.com/docs/11.x
+-   Medium https://medium.com/@hairulanam21
 -   Whatsapp https://wa.me/6285322778935?text=Hai%20Kak
 
 Terima kasih semoga bermanfaat :)
