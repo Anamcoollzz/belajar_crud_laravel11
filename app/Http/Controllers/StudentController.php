@@ -50,15 +50,18 @@ class StudentController extends Controller
         // $student->save();
 
         $path = $request->file('avatar')->store('public/avatars');
+        $pdfPath = $request->file('attachment')->store('public/attachments');
         $url  = asset(Storage::url($path));
+        $urlPdf  = asset(Storage::url($pdfPath));
 
         // cara kedua
         Student::create([
-            'name'   => $request->name,
-            'nim'    => $request->nim,
-            'dob'    => $request->dob,
-            'gender' => $request->gender,
-            'avatar' => $url,
+            'name'       => $request->name,
+            'nim'        => $request->nim,
+            'dob'        => $request->dob,
+            'gender'     => $request->gender,
+            'avatar'     => $url,
+            'attachment' => $urlPdf,
         ]);
 
         // cara ketiga
@@ -119,12 +122,20 @@ class StudentController extends Controller
             $url  = asset(Storage::url($path));
         }
 
+        $urlPdf = $student->attachment;
+
+        if ($request->hasFile('attachment')) {
+            $pdfPath = $request->file('attachment')->store('public/attachments');
+            $urlPdf  = asset(Storage::url($pdfPath));
+        }
+
         $student->update([
-            'name'   => $request->name,
-            'nim'    => $request->nim,
-            'dob'    => $request->dob,
-            'gender' => $request->gender,
-            'avatar' => $url,
+            'name'       => $request->name,
+            'nim'        => $request->nim,
+            'dob'        => $request->dob,
+            'gender'     => $request->gender,
+            'avatar'     => $url,
+            'attachment' => $urlPdf,
         ]);
 
         return redirect()->back()->with('successMessage', 'Mahasiswa berhasil diperbarui');

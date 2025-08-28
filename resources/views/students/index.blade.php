@@ -34,6 +34,7 @@
           <th scope="col">Tanggal Lahir</th>
           <th scope="col">Jenis Kelamin</th>
           <th scope="col">Avatar</th>
+          <th scope="col">Lampiran</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
@@ -48,6 +49,11 @@
             <td>
               <a href="{{ $item->avatar }}" target="_blank">
                 <img style="max-width: 100px;" class="img-thumbnail" src="{{ $item->avatar }}" />
+              </a>
+            </td>
+            <td>
+              <a href="{{ $item->attachment }}" target="_blank">
+                download
               </a>
             </td>
             <td>

@@ -20,5 +20,6 @@ class Student extends Model
         'dob',
         'gender',
         'avatar',
+        'attachment',
     ];
 }

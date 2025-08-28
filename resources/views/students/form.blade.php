@@ -79,9 +79,18 @@
       </div>
       <div class="mb-3">
         <label for="avatar" class="form-label">Avatar</label>
-        <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="avatar" name="avatar" accept="image/*" required>
+        <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="avatar" name="avatar" accept="image/*" @isset($d->avatar) @else required @endisset>
         @error('avatar')
           <div id="invalidFeedbackAvatar" class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+      <div class="mb-3">
+        <label for="attachment" class="form-label">Attachment</label>
+        <input type="file" class="form-control @error('attachment') is-invalid @enderror" id="attachment" name="attachment" accept="application/pdf" required>
+        @error('attachment')
+          <div id="invalidFeedbackAttachment" class="invalid-feedback">
             {{ $message }}
           </div>
         @enderror

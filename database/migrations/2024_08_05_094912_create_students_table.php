@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('dob');
             $table->enum('gender', ['Laki-laki', 'Perempuan']);
             $table->string('avatar');
+            $table->string('attachment');
             $table->timestamps();
         });
     }
